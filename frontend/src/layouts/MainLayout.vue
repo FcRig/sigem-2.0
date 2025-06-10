@@ -1,13 +1,15 @@
 <template>
   <v-app>
-    <div class="grid-layout">
-      <AppHeader :user="user" @logout="logout" class="header" />
-      <AppSidebar class="sidebar" />
-      <v-main class="content">
-        <slot />
-      </v-main>
-      <AppFooter class="footer" />
-    </div>
+    <AppSidebar v-model="drawer" />
+    <AppHeader
+      :user="user"
+      @logout="logout"
+      @toggle-drawer="drawer = !drawer"
+    />
+    <v-main>
+      <slot />
+    </v-main>
+    <AppFooter />
   </v-app>
 </template>
 
@@ -20,6 +22,11 @@ import { mapState } from 'vuex';
 export default {
   name: 'MainLayout',
   components: { AppHeader, AppFooter, AppSidebar },
+  data() {
+    return {
+      drawer: false
+    };
+  },
   computed: {
     ...mapState(['user'])
   },
@@ -31,32 +38,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.grid-layout {
-  display: grid;
-  min-height: 100vh;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: 220px 1fr;
-  grid-template-areas:
-    "header header"
-    "sidebar content"
-    "footer footer";
-}
-
-.header {
-  grid-area: header;
-}
-
-.sidebar {
-  grid-area: sidebar;
-}
-
-.content {
-  grid-area: content;
-}
-
-.footer {
-  grid-area: footer;
-}
-</style>

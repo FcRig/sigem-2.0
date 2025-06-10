@@ -11,8 +11,21 @@
 <script>
 export default {
   name: 'AppSidebar',
-  data() {
-    return { drawer: false };
+  props: {
+    modelValue: {
+      type: Boolean,
+      required: true
+    }
+  },
+  computed: {
+    drawer: {
+      get() {
+        return this.modelValue;
+      },
+      set(val) {
+        this.$emit('update:modelValue', val);
+      }
+    }
   }
 };
 </script>
