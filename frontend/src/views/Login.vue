@@ -1,14 +1,25 @@
 <template>
-  <v-container class="fill-height" fluid>
+  <v-container class="fill-height login-page" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
-        <v-card>
+        <v-card class="login-card" elevation="8" rounded="lg">
           <v-card-title class="text-h5">
             Sistema de Gestão do Núcleo de Multas - SIGEM
           </v-card-title>
           <v-card-text>
-            <v-text-field label="Usuário" v-model="username" />
-            <v-text-field label="Senha" v-model="password" type="password" />
+            <v-text-field
+              class="mb-4"
+              label="Usuário"
+              v-model="username"
+              prepend-inner-icon="mdi-account"
+            />
+            <v-text-field
+              class="mb-4"
+              label="Senha"
+              v-model="password"
+              type="password"
+              prepend-inner-icon="mdi-lock"
+            />
           </v-card-text>
           <v-card-actions>
             <v-btn color="primary" @click="login">Entrar</v-btn>
@@ -33,3 +44,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.login-page {
+  background-color: #f5f5f5;
+}
+
+.login-card {
+  max-width: 500px;
+}
+</style>
