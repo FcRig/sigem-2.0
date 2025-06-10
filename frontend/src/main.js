@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import toasted from 'vue-toasted';
+import './assets/styles.css';
 
 const app = createApp(App);
 app.use(router);
