@@ -1,31 +1,14 @@
 <template>
-  <v-app>
-    <AppHeader :user="user" @logout="logout" />
-    <AppSidebar />
-    <v-main>
-      <router-view />
-    </v-main>
-    <AppFooter />
-  </v-app>
+  <MainLayout>
+    <router-view />
+  </MainLayout>
 </template>
 
 <script>
-import AppHeader from './components/Header.vue';
-import AppFooter from './components/Footer.vue';
-import AppSidebar from './components/Sidebar.vue';
-import { mapState } from 'vuex';
+import MainLayout from './layouts/MainLayout.vue';
 
 export default {
   name: 'App',
-  components: { AppHeader, AppFooter, AppSidebar },
-  computed: {
-    ...mapState(['user'])
-  },
-  methods: {
-    logout() {
-      this.$store.commit('logout');
-      this.$router.push('/login');
-    }
-  }
+  components: { MainLayout }
 };
 </script>
