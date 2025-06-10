@@ -1,11 +1,13 @@
 <template>
   <v-app>
-    <AppHeader :user="user" @logout="logout" />
-    <AppSidebar />
-    <v-main>
-      <slot />
-    </v-main>
-    <AppFooter />
+    <div class="grid-layout">
+      <AppHeader :user="user" @logout="logout" class="header" />
+      <AppSidebar class="sidebar" />
+      <v-main class="content">
+        <slot />
+      </v-main>
+      <AppFooter class="footer" />
+    </div>
   </v-app>
 </template>
 
@@ -30,4 +32,31 @@ export default {
 };
 </script>
 
-<!-- Move layout-specific styles here if needed -->
+<style scoped>
+.grid-layout {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 220px 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar content"
+    "footer footer";
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
+
+.footer {
+  grid-area: footer;
+}
+</style>
