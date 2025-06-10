@@ -1,0 +1,17 @@
+{
+  "name": "sigem-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "vue": "^3.x",
+    "vue-router": "^4.x",
+    "vuex": "^4.x",
+    "vuetify": "^3.x",
+    "axios": "^1.x",
+    "vue-toasted": "^2.x"
+  }
+}
