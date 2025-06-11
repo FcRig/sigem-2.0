@@ -1,2 +1,3 @@
-from .router import router
-__all__ = ['router']
+from .router import scraper_bp
+
+__all__ = ["scraper_bp"]

@@ -1,12 +1,14 @@
-from fastapi import FastAPI
-from .auth import router as auth_router
-from .scraper import router as scraper_router
+from flask import Flask, jsonify
+from .auth import auth_bp
+from .scraper import scraper_bp
 
-app = FastAPI(title="Sigem Scraper API")
 
-app.include_router(auth_router, prefix="/auth")
-app.include_router(scraper_router, prefix="/scraper")
+app = Flask(__name__)
 
-@app.get("/")
+app.register_blueprint(auth_bp, url_prefix="/auth")
+app.register_blueprint(scraper_bp, url_prefix="/scraper")
+
+
+@app.route("/")
 def read_root():
-    return {"message": "Sigem 2.0 backend"}
+    return jsonify(message="Sigem 2.0 backend")
