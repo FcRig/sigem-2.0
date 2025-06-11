@@ -42,15 +42,15 @@
                   color="primary"
                   block
                   class="mb-2"
-                  @click="login"
+                  @click="register"
                   :disabled="!formValid"
                 >
-                  Entrar
+                  Cadastrar
                 </v-btn>
 
-                <router-link to="/register">
+                <router-link to="/login">
                   <v-btn color="secondary" variant="text" block>
-                    Criar conta
+                    Já possui conta? Entrar
                   </v-btn>
                 </router-link>
               </v-form>
@@ -68,7 +68,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { loginUser } from '../services/api'
+import { registerUser } from '../services/api'
 
 const cpf = ref('')
 const senha = ref('')
@@ -84,10 +84,10 @@ const rules = {
   }
 }
 
-function login() {
+function register() {
   if (!formRef.value?.validate()) return
-  loginUser({ username: cpf.value, password: senha.value })
-    .then(() => console.log('logado'))
+  registerUser({ username: cpf.value, password: senha.value })
+    .then(() => console.log('registrado'))
     .catch(err => console.error(err))
 }
 </script>
