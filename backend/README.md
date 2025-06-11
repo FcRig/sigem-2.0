@@ -11,12 +11,11 @@ Python backend using FastAPI for scraping with session management and authentica
 
 ## Development
 
-Create a virtual environment, install dependencies, and run the application:
+Create a virtual environment, install dependencies, and run the application.
+The `setup.sh` script prepares the environment for you:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+./setup.sh
 uvicorn app.main:app --reload
 ```
 
