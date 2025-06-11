@@ -1,62 +1,90 @@
 <template>
-  <v-container class="fill-height login-page" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-card class="login-card" elevation="8" rounded="lg" color="white">
-          <v-card-title class="text-h5 prf-title text-center">
-            Sistema de Gestão do Núcleo de Multas - SIGEM
-          </v-card-title>
-          <v-card-text>
-            <v-text-field
-              class="mb-4"
-              label="Usuário"
-              v-model="username"
-              prepend-inner-icon="mdi-account"
-            />
-            <v-text-field
-              class="mb-4"
-              label="Senha"
-              v-model="password"
-              type="password"
-              prepend-inner-icon="mdi-lock"
-            />
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="secondary" @click="login" dark>Entrar</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-app>
+    <v-main class="fill-height">
+      <v-container fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
+            <v-card class="pa-6 rounded-lg elevation-8">
+              <div class="logo-container">
+                <img
+                  src="https://auto.prf.gov.br/assets/logo-PRF.8d8f70ac.svg"
+                  alt="Logo PRF"
+                  class="logo"
+                >
+              </div>
+
+              <v-card-title class="text-h6 text-center mb-4">
+                Sistema de Gestão do Núcleo de Multas – SIGEM
+              </v-card-title>
+
+              <v-form>
+                <v-text-field
+                  v-model="cpf"
+                  label="CPF"
+                  prepend-inner-icon="mdi-account"
+                  maxlength="14"
+                  outlined
+                  hide-details
+                  class="mb-4"
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="senha"
+                  label="Senha"
+                  prepend-inner-icon="mdi-lock"
+                  type="password"
+                  outlined
+                  hide-details
+                  class="mb-6"
+                ></v-text-field>
+
+                <v-btn color="primary" block class="mb-2" @click="login">
+                  Entrar
+                </v-btn>
+
+                <v-btn color="secondary" variant="text" block>
+                  Esqueci minha senha
+                </v-btn>
+              </v-form>
+
+              <v-card-subtitle class="text-center mt-6 caption">
+                © {{ year }} Polícia Rodoviária Federal
+              </v-card-subtitle>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-export default {
-  name: 'LoginView',
-  data() {
-    return { username: '', password: '' };
-  },
-  methods: {
-    login() {
-      this.$store.commit('setUser', { name: this.username });
-      this.$router.push('/');
-    }
-  }
-};
+<script setup>
+import { ref, computed } from 'vue'
+
+const cpf = ref('')
+const senha = ref('')
+const year = new Date().getFullYear()
+
+function login() {
+  // lógica de autenticação aqui
+  console.log({ cpf: cpf.value, senha: senha.value })
+}
 </script>
 
 <style scoped>
-.login-page {
-  background: linear-gradient(135deg, #002776, #001a4d);
-  color: #fff;
+.fill-height {
+  min-height: 100vh;
+  background: #e4e5e6;
 }
 
-.login-card {
-  max-width: 500px;
-  border-top: 4px solid #FFCC00;
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
-.prf-title {
-  color: #002776;
+.logo {
+  width: 140px;
+  height: auto;
 }
 </style>

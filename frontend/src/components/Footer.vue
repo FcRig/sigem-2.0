@@ -1,5 +1,5 @@
 <template>
-  <v-footer app color="primary" dark>
+  <v-footer app color="#f3d712">
     <span class="mx-auto">&copy; 2024 SIGEM</span>
   </v-footer>
 </template>
@@ -9,3 +9,4 @@ export default {
   name: 'AppFooter'
 };
 </script>
+
