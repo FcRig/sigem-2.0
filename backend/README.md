@@ -1,10 +1,10 @@
 # Backend
 
-Python backend using FastAPI for scraping with session management and authentication.
+Python backend using Flask for scraping with session management and authentication.
 
 ## Structure
 
-- **app/main.py** – FastAPI application instance
+- **app/main.py** – Flask application instance
 - **app/auth/** – authentication routes and utilities
 - **app/scraper/** – scraping logic using `requests`
 - **requirements.txt** – Python package requirements
@@ -17,7 +17,7 @@ Create a virtual environment, install dependencies, and run the application:
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+flask --app app.main run
 ```
 
 ## API
