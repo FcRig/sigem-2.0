@@ -1,18 +1,30 @@
-from fastapi import APIRouter, Depends, HTTPException
+from flask import Blueprint, request, abort, jsonify
 
 users = {}
 
-router = APIRouter()
+auth_bp = Blueprint('auth', __name__)
 
-@router.post('/register')
-def register(username: str, password: str):
+
+@auth_bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json(silent=True) or request.form
+    username = data.get('username')
+    password = data.get('password')
+    if not username or not password:
+        abort(400, description="username and password required")
     if username in users:
-        raise HTTPException(status_code=400, detail="User already exists")
+        abort(400, description="User already exists")
     users[username] = password
-    return {"message": "registered"}
+    return jsonify(message="registered")
 
-@router.post('/login')
-def login(username: str, password: str):
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json(silent=True) or request.form
+    username = data.get('username')
+    password = data.get('password')
+    if not username or not password:
+        abort(400, description="username and password required")
     if users.get(username) != password:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    return {"token": username}
+        abort(401, description="Invalid credentials")
+    return jsonify(token=username)

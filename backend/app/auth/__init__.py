@@ -1,2 +1,3 @@
-from .router import router
-__all__ = ['router']
+from .router import auth_bp
+
+__all__ = ["auth_bp"]
