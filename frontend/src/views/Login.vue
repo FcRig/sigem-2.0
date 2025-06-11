@@ -17,14 +17,14 @@
                 Sistema de Gestão do Núcleo de Multas – SIGEM
               </v-card-title>
 
-              <v-form>
+              <v-form ref="formRef" v-model="formValid">
                 <v-text-field
                   v-model="cpf"
                   label="CPF"
                   prepend-inner-icon="mdi-account"
                   maxlength="14"
                   outlined
-                  hide-details
+                  :rules="[rules.required, rules.cpf]"
                   class="mb-4"
                 ></v-text-field>
 
@@ -34,11 +34,17 @@
                   prepend-inner-icon="mdi-lock"
                   type="password"
                   outlined
-                  hide-details
+                  :rules="[rules.required]"
                   class="mb-6"
                 ></v-text-field>
 
-                <v-btn color="primary" block class="mb-2" @click="login">
+                <v-btn
+                  color="primary"
+                  block
+                  class="mb-2"
+                  @click="login"
+                  :disabled="!formValid"
+                >
                   Entrar
                 </v-btn>
 
@@ -59,13 +65,24 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 const cpf = ref('')
 const senha = ref('')
+const formRef = ref(null)
+const formValid = ref(false)
 const year = new Date().getFullYear()
 
+const rules = {
+  required: v => !!v || 'Campo obrigatório',
+  cpf: v => {
+    const digits = String(v || '').replace(/\D/g, '')
+    return digits.length === 11 || 'CPF inválido'
+  }
+}
+
 function login() {
+  if (!formRef.value?.validate()) return
   // lógica de autenticação aqui
   console.log({ cpf: cpf.value, senha: senha.value })
 }
