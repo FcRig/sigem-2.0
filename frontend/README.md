@@ -21,3 +21,9 @@ Install dependencies and run the development server:
 npm install
 npm run serve
 ```
+
+## Routes
+
+- `/login` – página de autenticação
+- `/register` – cadastro de usuário
+- `/` – página inicial

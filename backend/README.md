@@ -19,3 +19,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
+
+## API
+
+- `POST /auth/register` – create a new user with `username` and `password`
+- `POST /auth/login` – obtain a token using credentials
